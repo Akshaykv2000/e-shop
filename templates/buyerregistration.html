@@ -1,0 +1,167 @@
+<html>
+<script src="/static/jquery-1.8.3.min.js"></script>
+<script>
+	$(document).ready(function(){
+	$("#username").change(function(){
+	var username=$('#username').val();
+	$.ajax({
+		url:'{% url 'checkusername' %}',
+		data:{'username':username},
+		success:function(data){
+		if(data.valid=='exist')
+		{
+			alert("username already exist")
+		}
+		("#username").val('');
+	}
+	})
+	})
+	})
+</script>
+<script type="text/javascript">
+
+	function validation()
+	{
+		var alpha=/^[a-zA-Z]+$/;
+		var num=/[0-9]+$/;
+		
+		var name=document.getElementById('name');
+
+		var address=document.getElementById('address');
+		var phone=document.getElementById('phone');
+		var dob=document.getElementById('dob');
+		var gender=document.myform.gender;
+		var country=document.getElementById('country');
+		var username=document.getElementById('username');
+		var password=document.getElementById('password');
+
+		if(name.value.length==0)
+		{
+			alert("enter a name");
+			return false;
+		}
+		else if(!name.value.match(alpha))
+		{
+			alert("enter a valid name")
+			name.focus();
+			return false;
+		}
+		else if(address.value.length==0)
+		{
+			alert("enter address")
+			return false;
+		}
+		else if(phone.value.length==0)
+		{
+			alert("enter phone number")
+			return false;
+		}
+		else if(!phone.value.match(num))
+		{			
+			alert("enter valid phone number")
+			return false;
+		}
+		else if(dob.value.length==0)
+		{
+			alert("enter dob")
+			return false;
+		}
+		else if(gender[0].checked==false&&gender[1].checked==false)
+		{
+			alert("enter valid gender")
+			return false;
+		}
+		else if(country.value.length==0)
+		{
+			alert("enter country")
+			return false;
+		}
+		else if(!country.value.match(alpha))
+		{
+			alert("enetr valid country")
+			country.focus();
+			return false;
+		}
+		else if(username.value.length==0)
+		{
+			alert("enter username")
+			return false;
+		}
+		else if(password.value.length==0)
+		{
+			alert("enter password")
+			return false;
+		}
+		else
+			{
+			return true;
+			}
+}
+</script>
+
+	<body>
+		<form method="post" action="{% url 'buyerregistrationAction' %}" name="myform">
+		{% csrf_token %}
+			<table>
+				<tr>
+				<td>NAME</td>
+				<td><input type="text" name="name" id="name"></td>
+				</tr>
+
+				<tr>
+				<td>ADDRESS</td>
+				<td><textarea name="address" rows="5" coloumns="10" id="address"></textarea></td>
+				</tr>
+
+				<tr>
+				<td>PHONE NUMBER</td>
+				<td><input type="text" name="phone" id="phone"></td>
+				</tr>
+
+				<tr>
+				<td>DOB</td>
+				<td><input type="date" name="dob" id="dob"></td>
+				</tr>
+
+				<tr>
+				<td>GENDER</td>
+				<td><input type="radio" name="gender" id="gender" value="male">male<input type="radio" name="gender" value="female">female</td>
+				</tr>
+
+				<tr>
+				<td>COUNTRY</td>
+				<td>
+				<select name="country" id="country">
+				<option value="">--select--</option>
+				<option value="india">india</option>
+				<option value="china">china</option>
+				<option value="pakistan">pakistan</option>
+				</select>
+				</td>
+				</tr>
+				
+				<tr>
+				<td>USERNAME</td>
+				<td><input type="text" name="username" id="username"></td>
+				</tr>
+
+				<tr>
+				<td>PASSWORD</td>
+				<td><input type="password" name="password" id="password"></td>
+				</tr>
+
+				<tr>
+				<td></td>
+				<td><input type="submit" name="register" onclick="return validation()"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert("{{msg}}")
+		</scipt>
+	{% endfor %}
+{% endif %}
+</html>

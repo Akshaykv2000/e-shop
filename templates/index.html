@@ -1,0 +1,12 @@
+<html>
+<li><a href="{% url 'buyerregistration'%}">buyer registration</li>
+<li><a href="{% url 'sellerregistration' %}">seller registration</li>
+<li><a href="{% url 'login' %}">Login</li>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert("{{msg}}")
+		</script>
+	{% endfor %}
+{% endif %}
+</html>

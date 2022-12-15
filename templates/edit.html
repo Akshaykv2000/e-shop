@@ -1,0 +1,70 @@
+<html>
+	<body>
+		<form method="post" action="{% url 'updateprofileAction'%}">
+			{% csrf_token %}
+			{% for v in buyer %}
+			<input type="hidden" name="id" value="{{v.id}}">
+			<table>
+
+			<tr>
+			<td>NAME</td>
+			<td><input type="text" name="name" value="{{v.name}}"></td>
+			</tr>
+
+			<tr>
+			<td>ADDRESS</td>
+			<td><textarea name="address" row="4" coloumn="5">{{v.address}}</textarea></td>
+			</tr>
+
+			<tr>
+			<td>GENDER</td>
+			<td>{% if v.gender == 'male' %}
+			<input type="radio" name="gender" value="gender" checked="true">male
+			<input type="radio" name="gender" value="gender">female
+			{% else %}
+			<input type="radio" name="gender" value="gender">male
+			<input type="radio" name="gender" value="gender" checked="true">female
+			{% endif %}
+			</td>
+			</tr>
+		
+			<tr>
+			<td>PHONE</td>
+			<td><input type="text" name="phone" value="{{v.phone}}"></td>
+			</tr>
+
+			<tr>
+			<td>DOB</td>
+			<td><input type="date" name="dob" value="{{v.dob}}"></td>
+			</tr>
+
+			<tr>
+			<td>COUNTRY</td>
+			<td>
+			<select name="country">
+			<option value="{{v.id}}">india</option>
+			<option value="{{v.id}}">china</option>
+			<option value="{{v.id}}">america</option>
+			</td>
+			</tr>
+
+			<tr>
+			<td>USERNAME</td>
+			<td><input type="text" name="username" value="{{v.username}}"></td>
+			</tr>
+
+			<tr>
+			<td>PASSWORD</td>
+			<td><input type="password" name="password" value="{{v.password}}"></td>
+			</tr>
+
+			<tr>
+			<td></td>
+			<td><input type="submit" value="update"></td>
+			</tr>
+
+			</table>		
+			{% endfor %}
+		</form>
+	</body>
+</html>

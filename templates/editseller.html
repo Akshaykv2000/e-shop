@@ -1,0 +1,77 @@
+<html>
+	<body>
+		<form method="post" action="{% url 'editsellerAction' %}" enctype="multipart/form-data">
+			{% csrf_token %}
+<input type="hidden" name="id">
+			{% for v in seller %}
+			
+			<table>
+			<tr>
+			<td>NAME</td>
+			<td><input type="text" name="name" value="{{v.name}}"></td>
+			</tr>
+
+			<tr>
+			<td>ADDRESS</td>
+			<td><textarea name="address" row="4" coloumn="5">{{v.address}}</textarea></td>
+			</tr>
+
+			<tr>
+			<td>GENDER</td>
+			<td>
+			{% if v.gender == 'male' %}
+			<input type="radio" name="gender" value="male" checked="true">male
+			<input type="radio" name="gender" value="female">female
+			{% else %}
+			<input type="radio" name="gender" value="male">male
+			<input type="radio" name="gender" value="female" checked="true">female
+			{% endif %}
+			</td>
+			</tr>
+
+			<tr>
+			<td>PHONE</td>
+			<td><input type="text" name="phone" value="{{v.phone}}"></td>
+			</tr>
+
+			<tr>
+			<td>DOB</td>
+			<td><input type="date" name="dob" value="{{v.dob}}"></td>
+			</tr>
+
+			<tr>
+			<td>USERNAME</td>
+			<td><input type="text" name="username" value="{{v.username}}"></td>
+			</tr>
+			
+			<tr>
+			<td>COUNTRY</td>
+			<td>
+			<select name="country">
+			<option value="{{v.country}}">{{v.country}}</option>
+			<option value="china">china</option>
+			<option value="america">america</option>
+			</td>
+			</tr>
+
+			<tr>
+			<td>PASSWORD</td>
+			<td><input type="text" name="password" value="{{v.password}}"></td>
+			</tr>
+
+			<tr>
+			<td>FILE</td>
+			<td><img src="{{v.file.url}}" height="100px" width="50px" alt="no pic"></td>
+			<td><input type="file" name="file"></td>
+			</tr>
+
+			<tr>
+			<td></td>
+			<td><input type="submit" value="update"></td>
+			</tr>
+			</table>
+			{% endfor %}
+
+		</form>
+	</body>
+</html>

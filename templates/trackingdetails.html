@@ -1,0 +1,27 @@
+<html>
+	<body>
+		<form method="post" action="{% url 'trackingdetailsAction' %}">
+		{% csrf_token %}
+			
+			<table>
+			
+			{% for v in seller %}	
+			
+			<tr>
+			<td><input type="hidden" name="id" value="{{v.id}}"></td>
+			</tr>
+				<tr>
+				<td>DETAILS</td>
+				<td><textarea name="details" row="10" coloumn="5"></textarea></td>
+				</tr>
+				
+				<tr>
+				<td></td>
+				<td><input type="submit" value="submit"></td>
+				</tr>
+			{% endfor %}
+			</table>
+			
+		</form>
+	</body>
+</html>

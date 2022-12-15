@@ -1,0 +1,28 @@
+<html>
+	<body>
+		<form>
+			<table>
+				<tr>
+				<th>PRODUCTNAME</th>
+				<th>PRICE</th>
+				<th>STOCK</th>
+				<th>FILE</th>
+				<th>DETAILS</th>
+				<th>CATEGORY</th>
+				</tr>
+				{% for v in product %}
+				<tr>
+				<td>{{v.productname}}</td>
+				<td>{{v.price}}</td>
+				<td>{{v.stock}}</td>
+				<td><img src="{{v.file.url}}" height="100px" width="50px" alt="no pic"></td>
+				<td>{{v.details}}</td>
+				<td>{{v.categoryid.name}}</td>
+				<td><a href="{% url 'delete' v.id %}">Delete</a></td>
+				<td><a href="{% url 'edit' v.id %}">Edit</a></td>
+				</tr>
+				{% endfor %}
+			</table>
+		</form>
+	</body>
+</html>

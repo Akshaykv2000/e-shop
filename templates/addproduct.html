@@ -1,0 +1,118 @@
+<html>
+<script type="text/javascript">
+	function validation()
+	{
+		var alpha=/^[a-zA-Z]+$/;
+		var num=/^[0-9]+$/;
+		var productname=document.getElementById("productname");
+		var file=document.getElementById("file")
+		var details=document.getElementById("details")
+		var price=document.getElementById("price")
+		var stock=document.getElementById("stock")
+		var categoryid=document.getElementById("categoryid")
+
+		if(productname.value.length==0)
+		{
+			alert("enter product name");
+			return false;
+		}
+		else if(file.value.length==0)
+		{
+			alert("choose file");
+			return false;
+		}
+		else if(details.value.length==0)
+		{
+			alert("enter details");
+			return false;
+		}
+		else if(price.value.length==0)
+		{
+			alert("enter price");
+			return false;	
+		}
+		else if(!price.value.match(num))
+		{
+			alert("enter valid price");
+			price.focus();
+			return false;
+		}
+		else if(stock.value.length==0)
+		{
+			alert("enter stock");
+			return false;
+		}
+		else if(!stock.value.match(num))
+		{
+			alert("enter valid stock");
+			stock.focus();
+			return false;
+		}
+		else if(categoryid.value.length==0)
+		{
+			alert("enter categoryid");
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+</script>
+	<body>
+		<form method="post" action="{% url 'addproductAction' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+			<table>
+				<tr>
+				<td>PRODUCTNAME</td>
+				<td><input type="text" id="productname" name="productname"></td>
+				</tr>
+
+				<tr>
+				<td>FILE</td>
+				<td><input type="file" id="file" name="file"></td>
+				</tr>
+
+				<tr>
+				<td>DETAILS</td>
+				<td><textarea name="details" row="5" coloumn="10" id="details"></textarea></td>
+				</tr>
+
+				<tr>
+				<td>PRICE</td>
+				<td><input type="text" id="price" name="price"></td>
+				</tr>
+
+				<tr>
+				<td>STOCK</td>
+				<td><input type="text" id="stock" name=stock></td>
+				</tr>
+
+				<tr>
+				<td>CATEGORYID</td>
+				<td>
+				<select name="category" id="categoryid">
+				<option value="">--select--</option>
+				{% for p in category %}
+				<option value="{{p.id}}">{{p.name}}</option>
+				{% endfor %}
+				</select>
+				</td>
+				</tr>
+
+				<tr>
+				<td></td>
+				<td><input type="submit" value="add product" onclick="return validation()"></td>
+				</tr>
+				
+			</table>
+		</form>
+	</body>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert("{{msg}}")
+		</script>
+	{% endfor %}
+{% endif %}
+</html>

@@ -1,0 +1,42 @@
+<html>
+<script type="text/javascript">
+function validation()
+	{
+		var alpha=/^[a-zA-Z]+$/;
+    		var num=/^[0-9]+$/;
+		var name=document.getElementById("name")
+		if(name.value.length == 0)
+		{
+			alert("enter category name");
+			return false;
+		}
+		else
+			{
+			return true;
+			}
+	}	
+</script>
+	<body>
+		<form method="post" action="{% url 'addcategoryAction' %}">
+		{% csrf_token %}
+			<table>
+				<tr>
+				<td>NAME</td>
+				<td><input type="text" id="name" name="name"></td>
+				</tr>
+
+				<tr>
+				<td></td>
+				<td><input type="submit" value="add" onclick="return validation()"></td>
+				</tr>
+			</table>
+		</form>
+	</body>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert("{{msg}}")
+		</script>
+	{% endfor %}
+{% endif %}
+</html>
